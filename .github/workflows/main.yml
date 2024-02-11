@@ -56,5 +56,5 @@ jobs:
           server: ${{ secrets.ftp_server }}
           username: ${{ secrets.ftp_username }}
           password: ${{ secrets.ftp_password }}
-          local-dir: ${{ runner.workspace }}/common-dist
+          local-dir: ${{ runner.workspace }}/common-dist/
           server-dir: community.mentorheal.com/

@@ -28,12 +28,24 @@ jobs:
         run: echo "${{ secrets.ENV_FILE }}" > .env
       - name: build
         run: npm run build --if-present
+      - name: Upload dist folder as an artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: my-dist-artifact
+          path: dist
      
   deploy:
     name: Deploy
     needs: [build]
     runs-on: ubuntu-latest
     steps:
+      - name: Download dist folder artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: my-dist-artifact
+          path: dist
+      - name: Show dir
+        run: ls
       - name: Upload to FTP Server
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
